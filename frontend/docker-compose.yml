@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  mdic:
+    volumes:
+      - ""
+    container_name: mysqldesafio
+    image: mysql:5.7
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    network_mode: host

@@ -1,0 +1,12 @@
+<p-tabMenu [model]="items" [activeItem]="items[0]" >
+  <ng-template pTemplate="item" let-item let-i="index">
+    <a routerLink="{{item.link}}" (click)="ativarItem($event, i)">
+      <div style="position: relative; text-align: center; min-width: 10em">
+          <div class="ui-menuitem-icon" [ngClass]="item.icon" *ngIf="item.icon" style="font-size: 3em"></div>
+          <div class="ui-menuitem-text descricao">
+              {{item.label}}
+          </div>
+      </div>
+    </a>
+  </ng-template>
+</p-tabMenu>

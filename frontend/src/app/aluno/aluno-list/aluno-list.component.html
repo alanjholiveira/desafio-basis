@@ -1,0 +1,35 @@
+<div class="ui-g">
+  <p-confirmDialog header="ConfirmaÃ§Ã£o" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+
+  <ng-container>
+    <div class="ui-g-12">
+        <p-button label="Novo" [routerLink]="['/aluno']" class="ui-button-text" id="btNovo" ></p-button>
+    </div>
+
+    <div class="ui-g-12">
+      <p-table [value]="alunos" [paginator]="true" rows="10" [responsive]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>Matrícula</th>
+            <th>Idade</th>
+            <th class="colActions"></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-aluno>
+          <tr>
+            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.matricula }}</td>
+            <td>{{ aluno.idade }}</td>
+            <td>
+              <p-button icon="pi pi-pencil" [routerLink]="['/aluno', aluno.id]" pTooltip="Editar" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
+              <p-button icon="pi pi-trash" pTooltip="Excluir" (click)="deletar(aluno)" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-container>
+</div>

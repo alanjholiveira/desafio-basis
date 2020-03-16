@@ -1,0 +1,61 @@
+<p-toast position="top-right" [style]="{marginTop: '80px'}"></p-toast>
+
+<ng-container>
+  <div class="ui-g">
+    <div class="ui-g-8 ui-g-offset-2">
+      <form [formGroup]="form">
+        <p-panel header="{{ title+' de Aluno' | uppercase }}">
+          <div class="ui-g mb-1 mt-1">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <input id="float-input" type="text" pInputText formControlName="nome" id="nome" [ngClass]="{ 'is-invalid' : submitted }">
+                <label for="float-input">Nome</label>
+              </span>
+            </div>
+          </div>
+
+          <div class="ui-g mb-1 mt-1">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <p-inputMask [unmask]="true"  formControlName="cpf" mask="999.999.999-99" [ngClass]="{ 'is-invalid' : submitted }"></p-inputMask>
+                <label for="float-input">CPF</label>
+              </span>
+            </div>
+          </div>
+
+          <div class="ui-g mb-1">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <input id="float-input" type="text" pInputText formControlName="matricula" id="matricula" [ngClass]="{ 'is-invalid' : submitted }">
+                <label for="float-input">Matricula</label>
+              </span>
+            </div>
+          </div>
+
+          <div class="ui-g mb-1">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <p-calendar formControlName="dataNascimento" dateFormat="dd/mm/yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2030"[locale]="pt" ></p-calendar>
+                <label>Data de Nascimento</label>
+              </span>
+            </div>
+          </div>
+
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <!-- <p-dropdown [options]="empresas" formControlName="idEmpresa" ></p-dropdown> -->
+                <p-multiSelect [options]="listaDisciplinas" defaultLabel="Disciplinas" formControlName="disciplinas" ></p-multiSelect>
+                <label>Empresa:</label>
+              </span>
+            </div>
+          </div>
+
+
+          <p-button label="Salvar" class="ui-button-text botaoFrm" (click)="onSubmit()" ></p-button>
+          <p-button label="Cancelar" class="ui-button-text botaoFrm" (click)="onCancel()" ></p-button>
+        </p-panel>
+      </form>
+    </div>
+  </div>
+</ng-container>

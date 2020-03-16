@@ -1,0 +1,16 @@
+h2, h1{
+  text-align: center;
+  color: #017ad9;
+}
+
+.center-logo {
+  height: 100%;
+  text-align: center;
+}
+
+img{
+  width: 750px;
+  height: 300px;
+  margin-top: 10%;
+}
+
