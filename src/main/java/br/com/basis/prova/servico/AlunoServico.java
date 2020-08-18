@@ -43,7 +43,8 @@ public class AlunoServico {
     }
 
     public List<AlunoDTO> consultar() {
-        return new ArrayList<>();
+        List<Aluno> aluno = alunoRepositorio.findAll();
+        return alunoMapper.toDto(aluno);
     }
 
     public AlunoDetalhadoDTO detalhar(Integer id) {

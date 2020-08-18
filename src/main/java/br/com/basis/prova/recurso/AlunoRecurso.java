@@ -49,6 +49,7 @@ public class AlunoRecurso {
 
     @GetMapping
     public ResponseEntity<List<AlunoDTO>> consultar() {
+
         return ResponseEntity.ok(alunoServico.consultar());
     }
 
