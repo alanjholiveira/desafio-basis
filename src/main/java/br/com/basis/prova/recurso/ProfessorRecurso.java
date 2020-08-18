@@ -3,6 +3,7 @@ package br.com.basis.prova.recurso;
 
 import br.com.basis.prova.dominio.dto.ProfessorDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDetalhadoDTO;
+import br.com.basis.prova.dominio.dto.ProfessorListagemDTO;
 import br.com.basis.prova.servico.ProfessorServico;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,7 +50,7 @@ public class ProfessorRecurso {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProfessorDTO>> consultar() {
+    public ResponseEntity<List<ProfessorListagemDTO>> consultar() {
         return ResponseEntity.ok(professorServico.consultar());
     }
 
