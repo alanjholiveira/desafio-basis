@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common'; 
+import localePt from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app.routing.module';
 import { AlunoModule } from './aluno/aluno.module';
@@ -16,6 +18,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule
   ],
   providers: [
-    ConfirmationService
+    ConfirmationService,
   ],
   bootstrap: [AppComponent]
 })

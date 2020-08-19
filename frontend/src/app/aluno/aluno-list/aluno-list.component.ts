@@ -26,10 +26,13 @@ export class AlunoListComponent implements OnInit {
   }
 
   listarAlunos() {
-    this.alunos = this.alunoService.listar();
+    this.alunoService.listar().subscribe((aluno: Aluno[]) => {
+      this.alunos = aluno;
+    });
   }
 
   deletar(aluno: Aluno) {
+    this.alunoService.deletar(aluno.id);
   }
 
 }
