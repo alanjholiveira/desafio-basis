@@ -32,10 +32,6 @@ export class AlunoService {
                     )
   }
 
-  listar2(): Observable<any>{
-    return this.http.get(this.API);
-  }
-
   public deletar(id: number) {
     // apaga aluno
     return this.http.delete(this.API + '/' + id)

@@ -12,15 +12,19 @@ import { DisciplinaListComponent } from './disciplina/disciplina-list/disciplina
 
 const appRoutes: Routes = [
   { path: "home", component: HomeComponent },
+
   { path: 'alunos', component: AlunoListComponent },
   { path: 'aluno', component: AlunoFormComponent },
   { path: 'aluno/:id', component: AlunoFormComponent },
+
   { path: 'professores', component: ProfessorListComponent },
   { path: 'professor', component: ProfessorFormComponent },
   { path: 'professor/:id', component: ProfessorFormComponent },
+
   { path: 'disciplinas', component: DisciplinaListComponent },
   { path: 'disciplina', component: DisciplinaFormComponent },
   { path: 'disciplina/:id', component: DisciplinaFormComponent },
+  
   { path: "", redirectTo: "/home", pathMatch: "full" }
 ];
 
