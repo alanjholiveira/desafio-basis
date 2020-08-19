@@ -6,6 +6,7 @@ import br.com.basis.prova.dominio.dto.AlunoDetalhadoDTO;
 import br.com.basis.prova.dominio.dto.AlunoListagemDTO;
 import br.com.basis.prova.repositorio.AlunoRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
+import br.com.basis.prova.servico.mapper.AlunoDetalhadoMapper;
 import br.com.basis.prova.servico.mapper.AlunoListagemMapper;
 import br.com.basis.prova.servico.mapper.AlunoMapper;
 import org.springframework.http.HttpStatus;
@@ -24,11 +25,14 @@ public class AlunoServico {
     private AlunoMapper alunoMapper;
     private AlunoRepositorio alunoRepositorio;
     private AlunoListagemMapper alunoListagemMapper;
+    private AlunoDetalhadoMapper alunoDetalhadoMapper;
 
-    public AlunoServico(AlunoMapper alunoMapper, AlunoRepositorio alunoRepositorio, AlunoListagemMapper alunoListagemMapper) {
+    public AlunoServico(AlunoMapper alunoMapper, AlunoRepositorio alunoRepositorio,
+                        AlunoListagemMapper alunoListagemMapper, AlunoDetalhadoMapper alunoDetalhadoMapper) {
         this.alunoMapper = alunoMapper;
         this.alunoRepositorio = alunoRepositorio;
         this.alunoListagemMapper = alunoListagemMapper;
+        this.alunoDetalhadoMapper = alunoDetalhadoMapper;
     }
 
     public AlunoDTO salvar(AlunoDTO alunoDTO) {
@@ -69,8 +73,9 @@ public class AlunoServico {
     }
 
     public AlunoDetalhadoDTO detalhar(Integer id) {
-        Aluno aluno = alunoRepositorio.findById(id).orElseThrow(() -> new RegraNegocioException("Registro não encontrado"));
-        return new AlunoDetalhadoDTO();
+        Aluno aluno = alunoRepositorio.findById(id)
+                .orElseThrow(() -> new RegraNegocioException("Aluno não encontrado"));
+        return alunoDetalhadoMapper.toDto(aluno);
     }
 
 }

@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +48,6 @@ public class ProfessorServico {
     }
 
     public void excluir(String matricula) {
-        //        List<Disciplina> disciplinas = disciplinaRepositorio.findByProfessor(professor);
         Optional<Professor> professor = professorRepositorio.findByMatricula(matricula);
 
         if (!professor.isPresent() && verificarProfessorDisciplina(matricula)) {
@@ -70,14 +68,10 @@ public class ProfessorServico {
     }
 
     public ProfessorDetalhadoDTO detalhar(Integer id) {
-        List<Professor> professor = professorRepositorio.findByIdAndDisciplinaAtivaEquals(id, 1);
-
-
-
-        return professorDetalhadoMapper.toDto(professor.get(0));
-//        return professorDetalhadoMapper.toDto(professor.get());
-
-//        return new ProfessorDetalhadoDTO();
+        Professor professor = professorRepositorio
+                .findById(id)
+                .orElseThrow(() -> new RegraNegocioException("Professor não encontrado"));
+        return professorDetalhadoMapper.toDto(professor);
     }
 
 }
