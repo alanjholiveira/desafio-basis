@@ -78,4 +78,12 @@ public class AlunoServico {
         return alunoDetalhadoMapper.toDto(aluno);
     }
 
+
+    public AlunoDTO find(Integer id) {
+        Aluno aluno = alunoRepositorio.findById(id)
+                .orElseThrow(() -> new RegraNegocioException("Aluno não encontrado"));
+
+        return alunoMapper.toDto(aluno);
+    }
+
 }

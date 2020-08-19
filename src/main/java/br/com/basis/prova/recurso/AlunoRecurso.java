@@ -59,4 +59,9 @@ public class AlunoRecurso {
         return ResponseEntity.ok(alunoServico.detalhar(id));
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<AlunoDTO> find(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(alunoServico.find(id));
+    }
+
 }

@@ -20,7 +20,7 @@ public class AlunoListagemDTO { // DTO usado para consulta simples de alunos
     @JsonIgnore
     private LocalDate dataNascimento;
     private Integer idade;
-    private List<DisciplinaDTO> disciplinas = new ArrayList<>();
+//    private List<DisciplinaDTO> disciplinas = new ArrayList<>();
 
 
 }
