@@ -4,6 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common'; 
 import localePt from '@angular/common/locales/pt';
+import { ToastModule } from 'primeng/toast';
 
 import { AppRoutingModule } from './app.routing.module';
 import { AlunoModule } from './aluno/aluno.module';
@@ -12,7 +13,7 @@ import { ProfessorModule } from './professor/professor.module';
 
 import {MenuModule} from 'primeng/menu';
 import {TabMenuModule} from 'primeng/tabmenu';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -35,10 +36,12 @@ registerLocaleData(localePt, 'pt');
     AlunoModule,
     DisciplinaModule,
     ProfessorModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastModule
   ],
   providers: [
     ConfirmationService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

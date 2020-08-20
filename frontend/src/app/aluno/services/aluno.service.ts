@@ -7,6 +7,8 @@ import { Aluno } from '../models/aluno.model';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 
+import { MessageService } from 'primeng/api';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +19,8 @@ export class AlunoService {
 
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private messageService: MessageService
   ) { }
 
   // httpOptions = {
@@ -39,7 +42,10 @@ export class AlunoService {
                       catchError(this.handleError)
                     )
                     .subscribe(() =>
-                      alert("Aluno deletado com sucesso")
+                    this.messageService.add(
+                      {severity:'success',
+                      detail:'Aluno deletado com sucesso'}
+                      )
                     );
   }
 
@@ -73,7 +79,10 @@ export class AlunoService {
                     .pipe(
                       catchError(this.handleError)
                     ).subscribe( () =>
-                        alert('Aluno Cadastro com Sucesso')
+                      this.messageService.add(
+                        {severity:'success',
+                        detail:'Aluno Cadastro com Sucesso'}
+                        )
                       );
   }
 
@@ -82,8 +91,11 @@ export class AlunoService {
     return this.http.put<Aluno>(this.API, aluno)
                     .pipe(
                       catchError(this.handleError)
-                    ).subscribe( dados =>
-                      alert('Aluno Atualizado com Sucesso')
+                    ).subscribe( dados =>                    
+                      this.messageService.add(
+                        {severity:'success',
+                        detail:'Aluno Atualizado com Sucesso'}
+                        )
                     );
   }
 

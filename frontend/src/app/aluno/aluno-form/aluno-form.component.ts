@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { DataFormatoUtils } from './../../util/dataFormatoUtils';
 import { Aluno } from '../models/aluno.model';
 import { AlunoService } from '../services/aluno.service';
+import { DisciplinaService } from 'src/app/disciplina/services/disciplina.service';
 
 @Component({
   selector: 'app-aluno-form',
@@ -18,6 +19,8 @@ import { AlunoService } from '../services/aluno.service';
   providers: [MessageService]
 })
 export class AlunoFormComponent implements OnInit {
+
+  disciplinas: Disciplina[];
 
   public aluno: Aluno = new Aluno();
   public form: FormGroup;
@@ -34,12 +37,14 @@ export class AlunoFormComponent implements OnInit {
     private messageService: MessageService,
     private alunoService: AlunoService,
     private location: Location,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private disciplinaService: DisciplinaService
   ) { }
 
   ngOnInit() {
     this.construirForm();
-    this.listaDisciplinas = this.converteDropDown(this.alunoService.getDisciplinas());
+    this.getDisciplinas();
+   
     this.route.params.subscribe( aluno => {
       if (aluno['id']) { 
         this.title = "Atualização";       
@@ -52,6 +57,14 @@ export class AlunoFormComponent implements OnInit {
 
       }
     }); 
+  }
+
+  private getDisciplinas() {
+    this.disciplinaService.listar()
+                          .subscribe(data => {
+                            this.disciplinas = data;
+                            this.listaDisciplinas = this.converteDropDown(this.disciplinas);
+                          });
   }
 
   private setForm() {
@@ -74,7 +87,6 @@ export class AlunoFormComponent implements OnInit {
       disciplinas: [[]]
     })
   }
-
   converteDropDown(arr) {
     return arr.map(disc => {
       return {
@@ -107,7 +119,10 @@ export class AlunoFormComponent implements OnInit {
 
       this.router.navigate(['/alunos']);
     } else {
-      alert('Campos preenchido incorreto')
+      this.messageService.add(
+        {severity:'error',
+        detail:'Campos preenchido incorretamente'}
+        )
     }
    
   }

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
@@ -40,6 +40,7 @@ import { AlunoFormComponent } from './aluno-form/aluno-form.component';
   ],
   providers: [
     ConfirmationService,
+    MessageService,
     DatePipe
   ]
 })
