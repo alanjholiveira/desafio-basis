@@ -68,10 +68,10 @@ export class AlunoFormComponent implements OnInit {
   }
 
   private setForm() {
-    // this.listaDisciplinas = this.converteDropDown(this.disciplinaList.getListaDisciplina());
     this.form.get('id').setValue(this.aluno.id);
     this.form.get('nome').setValue(this.aluno.nome);
     this.form.get('cpf').setValue(this.aluno.cpf);
+    // this.form.get('dataNascimento').setValue(this.datePipe.transform(this.aluno.dataNascimento, 'dd/MM/yyyy'));
     this.form.get('dataNascimento').setValue(this.aluno.dataNascimento);
     this.form.get('matricula').setValue(this.aluno.matricula);
     this.form.get('disciplinas').setValue(this.obterDisciplinas());
@@ -103,7 +103,7 @@ export class AlunoFormComponent implements OnInit {
   }
 
   vincularDisciplinas(disciplinasSelecionadas: any[]) {
-    let disciplinas = this.alunoService.getDisciplinas();
+    let disciplinas = this.disciplinas;
     return disciplinas.filter(disc => {
       console.log('VINCULAR DISCIPLINA')
       return disciplinasSelecionadas.some(sel => sel == disc.id);
@@ -111,13 +111,10 @@ export class AlunoFormComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.submitted = true;
     if (this.form.valid) {
       this.form.value.disciplinas = this.vincularDisciplinas(this.form.value.disciplinas);
-      this.alunoService.save(this.form.value);
-
-      this.router.navigate(['/alunos']);
+      this.salvar(this.form.value);
     } else {
       this.messageService.add(
         {severity:'error',
@@ -131,6 +128,29 @@ export class AlunoFormComponent implements OnInit {
     this.submitted = false;
     this.form.reset();
     this.location.back();
+  }
+
+  private salvar(aluno: Aluno) {
+    if (!aluno.id) {
+      this.alunoService.store(aluno).subscribe( data => {
+        // this.router.navigate(['/alunos']);
+        this.messageService.add(
+          {
+            severity:'success',
+            detail: `Aluno ${data.nome} Cadastro com Sucesso`
+          }
+        );
+      });
+    }
+    this.alunoService.update(aluno).subscribe( data => {
+      this.messageService.add(
+        {
+          severity:'success',
+          detail: `Aluno ${data.nome} Atualizado com Sucesso`}
+        );
+        // this.router.navigate(['/alunos']);
+    });               
+                     
   }
 
 }

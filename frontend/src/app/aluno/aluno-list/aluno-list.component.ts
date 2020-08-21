@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlunoService } from '../services/aluno.service';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { Aluno } from '../models/aluno.model';
 
@@ -18,7 +18,8 @@ export class AlunoListComponent implements OnInit {
   constructor(
     private alunoService: AlunoService,
     private confirmationService: ConfirmationService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -32,7 +33,29 @@ export class AlunoListComponent implements OnInit {
   }
 
   deletar(aluno: Aluno) {
-    this.alunoService.deletar(aluno.id);
+    this.confirmationService.confirm({
+      message: 'Tem certeza que você deseja excluir este registro?',
+      header: 'Confirmação de exclusão',
+      icon: 'fa fa-trash',
+      acceptLabel: "Confirmar",
+      rejectLabel: "Cancelar",
+      accept: () => {
+        this.alunoService.deletar(aluno.matricula).subscribe(() => {
+          this.removeItemTable(aluno.id);
+           this.messageService.add(
+             { 
+               severity:'success',
+               detail: `Aluno ${aluno.nome} deletado com sucesso`
+             }
+           )
+         }
+       );
+      },
+    })           
+  }
+
+  private removeItemTable(id: number) {
+    this.alunos = this.alunos.filter(aluno => aluno.id !== id);
   }
 
 }

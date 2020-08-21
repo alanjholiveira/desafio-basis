@@ -23,10 +23,6 @@ export class AlunoService {
     private messageService: MessageService
   ) { }
 
-  // httpOptions = {
-  //   headers: new HttpHeaders({'Content-Type': 'application/json'})
-  // }
-
   public listar(): Observable<Aluno[]> {
     //obtem lista de alunos
     return this.http.get<Aluno[]>(this.API)
@@ -35,17 +31,11 @@ export class AlunoService {
                     )
   }
 
-  public deletar(id: number) {
+  public deletar(matricula: number) {
     // apaga aluno
-    return this.http.delete(this.API + '/' + id)
+    return this.http.delete(this.API + '/' + matricula)
                     .pipe(
                       catchError(this.handleError)
-                    )
-                    .subscribe(() =>
-                    this.messageService.add(
-                      {severity:'success',
-                      detail:'Aluno deletado com sucesso'}
-                      )
                     );
   }
 
@@ -53,49 +43,35 @@ export class AlunoService {
     // obtem aluno por id
     return this.http.get<Aluno>(this.API + '/' + id)
                     .pipe(
-                      map( aluno => {
-                        // aluno.dataNascimento = new Date(this.datePipe.transform(Date.now()));
-                        return aluno;
-                      }),
                       catchError(this.handleError)
                     ); 
   }
 
-  public save(aluno: Aluno) {
-    if (!aluno.id) {
-      return this.store(aluno);
-    }
-    return this.update(aluno);
-  }
+  // public save(aluno: Aluno) {
+  //   if (!aluno.id) {
+  //     return this.store(aluno);
+  //   }
+  //   return this.update(aluno);
+  // }
 
-  public getDisciplinas() {
-    // obtem lista de disciplinas do aluno
-    return [];
-  }
+  // public getDisciplinas() {
+  //   // obtem lista de disciplinas do aluno
+  //   return [];
+  // }
 
-  private store(aluno: Aluno) {
+  public store(aluno: Aluno): Observable<Aluno> {
     //salva aluno
     return this.http.post<Aluno>(this.API, aluno)
                     .pipe(
                       catchError(this.handleError)
-                    ).subscribe( () =>
-                      this.messageService.add(
-                        {severity:'success',
-                        detail:'Aluno Cadastro com Sucesso'}
-                        )
-                      );
+                    );
   }
 
-  private update(aluno: Aluno) {
+  public update(aluno: Aluno): Observable<Aluno> {
     // atualiza aluno
     return this.http.put<Aluno>(this.API, aluno)
                     .pipe(
                       catchError(this.handleError)
-                    ).subscribe( dados =>                    
-                      this.messageService.add(
-                        {severity:'success',
-                        detail:'Aluno Atualizado com Sucesso'}
-                        )
                     );
   }
 
