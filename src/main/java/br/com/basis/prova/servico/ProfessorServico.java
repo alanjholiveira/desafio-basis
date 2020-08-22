@@ -74,4 +74,11 @@ public class ProfessorServico {
         return professorDetalhadoMapper.toDto(professor);
     }
 
+    public ProfessorDTO find(Integer id) {
+        Professor professor = professorRepositorio.findById(id)
+                            .orElseThrow(() -> new RegraNegocioException("Professor não encontrado"));
+
+        return professorMapper.toDto(professor);
+    }
+
 }

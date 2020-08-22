@@ -1,5 +1,6 @@
 package br.com.basis.prova.dominio.dto;
 
+import br.com.basis.prova.util.Helpers;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,7 @@ public class ProfessorListagemDTO {
     private String area;
     @JsonIgnore
     private LocalDate dataNascimento;
-    private Integer idade;
+    public Integer getIdade() {
+        return Helpers.calcularIdadeByDataNascimento(this.dataNascimento);
+    }
 }

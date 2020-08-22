@@ -59,4 +59,9 @@ public class ProfessorRecurso {
         return ResponseEntity.ok(professorServico.detalhar(id));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProfessorDTO> find(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(professorServico.find(id));
+    }
+
 }
