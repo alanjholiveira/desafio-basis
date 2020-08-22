@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Aluno } from '../models/aluno.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AlunoDetail } from '../models/aluno.detail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,13 @@ export class AlunoService {
   public update(aluno: Aluno): Observable<Aluno> {
     // atualiza aluno
     return this.http.put<Aluno>(this.API, aluno)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
+  }
+
+  public detail(id: number): Observable<AlunoDetail> {
+    return this.http.get<AlunoDetail>(this.API + '/detalhes/' + id)
                     .pipe(
                       catchError(this.handleError)
                     );

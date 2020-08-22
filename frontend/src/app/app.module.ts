@@ -11,9 +11,9 @@ import { AlunoModule } from './aluno/aluno.module';
 import { DisciplinaModule } from './disciplina/disciplina.module';
 import { ProfessorModule } from './professor/professor.module';
 
-import {MenuModule} from 'primeng/menu';
-import {TabMenuModule} from 'primeng/tabmenu';
-import {ConfirmationService, MessageService} from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { ConfirmationService, MessageService} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -37,7 +37,7 @@ registerLocaleData(localePt, 'pt');
     DisciplinaModule,
     ProfessorModule,
     AppRoutingModule,
-    ToastModule
+    ToastModule,
   ],
   providers: [
     ConfirmationService,

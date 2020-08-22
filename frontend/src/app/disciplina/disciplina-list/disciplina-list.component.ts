@@ -28,7 +28,6 @@ export class DisciplinaListComponent implements OnInit {
 
   listarDisciplinas() {
     this.disciplinaService.listar().subscribe((disciplinas: DisciplinaListagem[]) => {
-      console.log(disciplinas);
       this.disciplinas = disciplinas;
     });
   }

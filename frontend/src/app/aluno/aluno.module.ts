@@ -13,14 +13,18 @@ import {PanelModule, Panel} from 'primeng/panel';
 import {ToastModule} from 'primeng/toast';
 import {CalendarModule} from 'primeng/calendar';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import {CardModule} from 'primeng/card';
 
 import { AlunoListComponent } from './aluno-list/aluno-list.component';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
+import { AlunoDetailComponent } from './aluno-detail/aluno-detail.component';
 
 @NgModule({
   declarations: [
     AlunoListComponent,
     AlunoFormComponent,
+    AlunoDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -35,11 +39,16 @@ import { AlunoFormComponent } from './aluno-form/aluno-form.component';
     CalendarModule,
     MultiSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DynamicDialogModule,
+    CardModule
   ],
   providers: [
     ConfirmationService,
     MessageService,
+  ],
+  entryComponents: [
+    AlunoDetailComponent
   ]
 })
 export class AlunoModule { }

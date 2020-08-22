@@ -125,7 +125,6 @@ export class DisciplinaFormComponent implements OnInit {
     this.form.get('cargaHoraria').setValue(this.disciplina.cargaHoraria);
     this.form.get('ativa').setValue(this.disciplina.ativa)
     this.form.get('professor').setValue(this.disciplina.professor.id);
-    console.log(this.obterProfessor());
   }
 
   private vincularProfessor(professorSelecionado: any) {

@@ -14,6 +14,7 @@
             <th>Nome</th>
             <th>Matrícula</th>
             <th>Idade</th>
+            <th clasCargs="colActions">Detalhes</th>
             <th class="colActions"></th>
           </tr>
         </ng-template>
@@ -23,6 +24,9 @@
             <td>{{ aluno.nome }}</td>
             <td>{{ aluno.matricula }}</td>
             <td>{{ aluno.idade }}</td>
+            <td>
+              <p-button icon="pi pi-list" (click)="showDetail(aluno)" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
+            </td>
             <td>
               <p-button icon="pi pi-pencil" [routerLink]="['/aluno', aluno.id]" pTooltip="Editar" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
               <p-button icon="pi pi-trash" pTooltip="Excluir" (click)="deletar(aluno)" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
