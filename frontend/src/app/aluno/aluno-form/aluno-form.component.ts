@@ -1,14 +1,13 @@
-import { Disciplina } from '../../disciplina/models/disciplina.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Location, formatDate } from '@angular/common';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { DatePipe } from '@angular/common';
 
 import { DataFormatoUtils } from './../../util/dataFormatoUtils';
 import { Aluno } from '../models/aluno.model';
+import { Disciplina } from '../../disciplina/models/disciplina.model';
 import { AlunoService } from '../services/aluno.service';
 import { DisciplinaService } from 'src/app/disciplina/services/disciplina.service';
 
@@ -20,7 +19,7 @@ import { DisciplinaService } from 'src/app/disciplina/services/disciplina.servic
 })
 export class AlunoFormComponent implements OnInit {
 
-  disciplinas: Disciplina[];
+  public disciplinas: Disciplina[];
 
   public aluno: Aluno = new Aluno();
   public form: FormGroup;
@@ -37,7 +36,6 @@ export class AlunoFormComponent implements OnInit {
     private messageService: MessageService,
     private alunoService: AlunoService,
     private location: Location,
-    private datePipe: DatePipe,
     private disciplinaService: DisciplinaService
   ) { }
 
@@ -53,10 +51,9 @@ export class AlunoFormComponent implements OnInit {
             .subscribe(data => {
               this.aluno = data;
               this.setForm();
-            }, error => console.log(error));
-
+            }, error => console.log(error));   
       }
-    }); 
+    });
   }
 
   private getDisciplinas() {
@@ -65,16 +62,6 @@ export class AlunoFormComponent implements OnInit {
                             this.disciplinas = data;
                             this.listaDisciplinas = this.converteDropDown(this.disciplinas);
                           });
-  }
-
-  private setForm() {
-    this.form.get('id').setValue(this.aluno.id);
-    this.form.get('nome').setValue(this.aluno.nome);
-    this.form.get('cpf').setValue(this.aluno.cpf);
-    // this.form.get('dataNascimento').setValue(this.datePipe.transform(this.aluno.dataNascimento, 'dd/MM/yyyy'));
-    this.form.get('dataNascimento').setValue(this.aluno.dataNascimento);
-    this.form.get('matricula').setValue(this.aluno.matricula);
-    this.form.get('disciplinas').setValue(this.obterDisciplinas());
   }
 
   construirForm() {
@@ -87,6 +74,17 @@ export class AlunoFormComponent implements OnInit {
       disciplinas: [[]]
     })
   }
+
+  private setForm() {
+    this.form.get('id').setValue(this.aluno.id);
+    this.form.get('nome').setValue(this.aluno.nome);
+    this.form.get('cpf').setValue(this.aluno.cpf);
+    this.form.get('dataNascimento').setValue(this.aluno.dataNascimento);
+    this.form.get('matricula').setValue(this.aluno.matricula);
+    this.form.get('disciplinas').setValue(this.obterDisciplinas());
+  }
+
+
   converteDropDown(arr) {
     return arr.map(disc => {
       return {
@@ -121,7 +119,6 @@ export class AlunoFormComponent implements OnInit {
         detail:'Campos preenchido incorretamente'}
         )
     }
-   
   }
 
   onCancel(){
@@ -141,16 +138,16 @@ export class AlunoFormComponent implements OnInit {
           }
         );
       });
-    }
-    this.alunoService.update(aluno).subscribe( data => {
-      this.messageService.add(
-        {
-          severity:'success',
-          detail: `Aluno ${data.nome} Atualizado com Sucesso`}
-        );
-        // this.router.navigate(['/alunos']);
-    });               
-                     
+    } else {
+      this.alunoService.update(aluno).subscribe( data => {
+        this.messageService.add(
+          {
+            severity:'success',
+            detail: `Aluno ${data.nome} Atualizado com Sucesso`}
+          );
+          // this.router.navigate(['/alunos']);
+      });       
+    }                     
   }
 
 }

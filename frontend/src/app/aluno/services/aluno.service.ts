@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { Aluno } from '../models/aluno.model';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError, map } from 'rxjs/operators';
-
-import { MessageService } from 'primeng/api';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +16,9 @@ export class AlunoService {
 
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
-    private messageService: MessageService
   ) { }
 
+  /** Listar Aluno */
   public listar(): Observable<Aluno[]> {
     //obtem lista de alunos
     return this.http.get<Aluno[]>(this.API)
@@ -31,6 +27,7 @@ export class AlunoService {
                     )
   }
 
+  /** Deletar Aluno */
   public deletar(matricula: number) {
     // apaga aluno
     return this.http.delete(this.API + '/' + matricula)
@@ -39,6 +36,7 @@ export class AlunoService {
                     );
   }
 
+  /** Obter Aluno */
   public obterAluno(id: number): Observable<Aluno> {
     // obtem aluno por id
     return this.http.get<Aluno>(this.API + '/' + id)
@@ -47,18 +45,7 @@ export class AlunoService {
                     ); 
   }
 
-  // public save(aluno: Aluno) {
-  //   if (!aluno.id) {
-  //     return this.store(aluno);
-  //   }
-  //   return this.update(aluno);
-  // }
-
-  // public getDisciplinas() {
-  //   // obtem lista de disciplinas do aluno
-  //   return [];
-  // }
-
+  /** Criar Aluno */
   public store(aluno: Aluno): Observable<Aluno> {
     //salva aluno
     return this.http.post<Aluno>(this.API, aluno)
@@ -67,6 +54,7 @@ export class AlunoService {
                     );
   }
 
+  /** Atualizar Aluno */
   public update(aluno: Aluno): Observable<Aluno> {
     // atualiza aluno
     return this.http.put<Aluno>(this.API, aluno)
@@ -75,6 +63,7 @@ export class AlunoService {
                     );
   }
 
+  /** Handle Error */
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
