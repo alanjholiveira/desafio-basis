@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { DisciplinaListComponent } from './disciplina-list/disciplina-list.component';
-import { DisciplinaFormComponent } from './disciplina-form/disciplina-form.component';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -14,7 +12,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { DropdownModule } from 'primeng/dropdown';
 
+import { DisciplinaListComponent } from './disciplina-list/disciplina-list.component';
+import { DisciplinaFormComponent } from './disciplina-form/disciplina-form.component';
 
 @NgModule({
   declarations: [DisciplinaListComponent, DisciplinaFormComponent],
@@ -31,7 +32,8 @@ import { ConfirmationService } from 'primeng/api';
     CalendarModule,
     MultiSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropdownModule
   ],
   providers: [
     ConfirmationService,

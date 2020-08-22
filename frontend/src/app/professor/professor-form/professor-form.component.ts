@@ -42,7 +42,7 @@ export class ProfessorFormComponent implements OnInit {
         this.professorService.obterProfessor(professor['id'])
             .subscribe(data => {
               this.professor = data;
-              this.setform();
+              this.setForm();
             }, error => console.log(error));
       }
     })
@@ -59,7 +59,7 @@ export class ProfessorFormComponent implements OnInit {
   }
 
 
-  private setform() {
+  private setForm() {
     this.form.get('id').setValue(this.professor.id);
     this.form.get('nome').setValue(this.professor.nome);
     this.form.get('area').setValue(this.professor.area);

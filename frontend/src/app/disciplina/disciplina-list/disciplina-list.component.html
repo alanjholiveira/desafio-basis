@@ -13,10 +13,8 @@
             <th>Nome</th>
             <th>Descição</th>
             <th>Carga Horária</th>
-            <th>Ativa</th>
-            <th>Professor</th>
             <th clasCargs="colActions">Ações</th>
-            <th clasCargs="colActions">Detalhes</th>
+            <!-- <th clasCargs="colActions">Detalhes</th> -->
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-disciplina>
@@ -24,16 +22,14 @@
             <td>{{ disciplina.nome }}</td>
             <td>{{ disciplina.descricao }}</td>
             <td>{{ disciplina.cargaHoraria }}</td>
-            <td>{{ disciplina.ativa }}</td>
-            <td>{{ disciplina.professor.nome }}</td>
             <td>
               <p-button icon="pi pi-pencil" [routerLink]="['/disciplina', disciplina.id]" pTooltip="Editar" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
               <p-button icon="pi pi-trash" pTooltip="Excluir" (click)="deletar(disciplina)" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
             </td>
-            <td>
-              <p-button icon="pi pi-id-card" (click)="ListagemDTO(disciplina.id)" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
-              <p-button icon="pi pi-list" (click)="DetalhadoDTO(disciplina.id)"  tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
-            </td>
+            <!-- <td>
+              <p-button icon="pi pi-id-card" (click)="Listagem(disciplina.id)" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
+              <p-button icon="pi pi-list" (click)="Detalhado(disciplina.id)"  tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
+            </td> -->
           </tr>
         </ng-template>
       </p-table>

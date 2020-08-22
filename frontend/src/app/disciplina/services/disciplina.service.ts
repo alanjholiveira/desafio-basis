@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { Disciplina } from '../models/disciplina.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
+import { DisciplinaListagem } from '../models/disciplinaListagem.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,30 +22,46 @@ export class DisciplinaService {
   ) { }
 
   /** Listar Disciplina */
-  public listar(): Observable<Disciplina[]> {
+  public listar(): Observable<DisciplinaListagem[]> {
     return this.http.get<Disciplina[]>(this.API)
                     .pipe(
                       catchError(this.handleError)
                     );
   }
 
-  /** Deletar disciplina */
+  /** Deletar Disciplina */
   public deletar(id: number) {
     return this.http.delete(this.API + '/' + id)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
   }
 
-  /** Obter disciplina */
-  public obterProfessor(id: number) {
-
+  /** Obter Disciplina */
+  public obterDisciplina(id: number): Observable<Disciplina> {
+    return this.http.get<Disciplina>(this.API + '/' + id)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
   }
 
-  /** Salvar disciplina */
-  public save(professor: Disciplina) {
-    
+  /** Salvar Disciplina */
+  public store(disciplina: Disciplina): Observable<Disciplina> {
+    return this.http.post<Disciplina>(this.API, disciplina)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
+  }
+
+  public update(disciplina: Disciplina): Observable<Disciplina> {
+    return this.http.put<Disciplina>(this.API, disciplina)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
   }
 
 
-  /** Tratar Error */
+  /** Handle Error */
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
