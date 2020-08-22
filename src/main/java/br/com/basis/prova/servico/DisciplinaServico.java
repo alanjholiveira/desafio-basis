@@ -77,4 +77,12 @@ public class DisciplinaServico {
         return disciplinaDetalhadaMapper.toDto(disciplina);
     }
 
+    public DisciplinaDTO find(Integer id) {
+        Disciplina disciplina = disciplinaRepositorio.findById(id)
+                                                        .orElseThrow(() ->
+                                                                new RegraNegocioException("Disciplina não encontrada")
+                                                                );
+        return disciplinaMapper.toDto(disciplina);
+    }
+
 }

@@ -31,7 +31,8 @@ public class Disciplina {
     @Column(name = "ATIVA", nullable = false)
     private Integer ativa;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ID_PROFESSOR", referencedColumnName = "ID")
     private Professor professor;
 

@@ -58,4 +58,9 @@ public class DisciplinaRecurso {
         return ResponseEntity.ok(disciplinaServico.detalhar(id));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DisciplinaDTO> find(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(disciplinaServico.find(id));
+    }
+
 }

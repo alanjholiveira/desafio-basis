@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @NoArgsConstructor
 @Getter
 @Setter
@@ -17,7 +14,6 @@ public class DisciplinaDTO {
     private String descricao;
     private Integer cargaHoraria;
     private Integer ativa;
-
-    private String idProfessor;
+    private DisciplinaProfessorDTO professor;
 
 }
