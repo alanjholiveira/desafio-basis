@@ -1,5 +1,6 @@
 package br.com.basis.prova.dominio.dto;
 
+import br.com.basis.prova.util.Helpers;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,8 @@ public class AlunoListagemDTO { // DTO usado para consulta simples de alunos
     private String matricula;
     @JsonIgnore
     private LocalDate dataNascimento;
-    private Integer idade;
-//    private List<DisciplinaDTO> disciplinas = new ArrayList<>();
-
+    public Integer getIdade() {
+        return Helpers.calcularIdadeByDataNascimento(this.dataNascimento);
+    }
 
 }

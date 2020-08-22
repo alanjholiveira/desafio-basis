@@ -1,5 +1,6 @@
 package br.com.basis.prova.dominio.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class AlunoDTO { // DTO usado para salvar e editar um aluno
     private String nome;
     private String cpf;
     private String matricula;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     private List<DisciplinaDTO> disciplinas = new ArrayList<>();
 

@@ -47,6 +47,19 @@ public class AlunoServico {
         return alunoMapper.toDto(aluno);
     }
 
+    public AlunoDTO update(AlunoDTO alunoDTO) {
+        Optional<Aluno> aluno = alunoRepositorio.findById(alunoDTO.getId());
+
+        if (!aluno.isPresent()) {
+            throw new RegraNegocioException("Aluno não encontrado");
+        }
+
+        alunoRepositorio.save(alunoMapper.toEntity(alunoDTO));
+
+        return alunoMapper.toDto(aluno.get());
+
+    }
+
     private boolean verificarCPF(Aluno aluno) {
         Aluno alunoCpf = alunoRepositorio.findByCpf(aluno.getCpf());
         return !(alunoCpf == null || alunoCpf.getId().equals(aluno.getId()));
@@ -77,7 +90,6 @@ public class AlunoServico {
                 .orElseThrow(() -> new RegraNegocioException("Aluno não encontrado"));
         return alunoDetalhadoMapper.toDto(aluno);
     }
-
 
     public AlunoDTO find(Integer id) {
         Aluno aluno = alunoRepositorio.findById(id)
