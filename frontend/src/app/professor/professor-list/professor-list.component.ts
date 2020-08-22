@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { ProfessorService } from '../services/professor.service';
 import { Professor } from '../models/professor.model';
@@ -19,6 +19,7 @@ export class ProfessorListComponent implements OnInit {
     private professorService: ProfessorService,
     private confirmationService: ConfirmationService,
     private router: Router,
+    private messageService: MessageService
     ) { }
 
   ngOnInit() {
@@ -31,8 +32,27 @@ export class ProfessorListComponent implements OnInit {
     });
   }
 
-  deletar(aluno: Professor) {
-    this.professorService.deletar(aluno.id);
+  deletar(professor: Professor) {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que você deseja excluir este registro?',
+      header: 'Confirmação de exclusão',
+      icon: 'fa fa-trash',
+      acceptLabel: 'Confirmar',
+      rejectLabel: 'Cancelar',
+      accept: () => {
+        this.professorService.deletar(professor.matricula).subscribe(() => {
+          this.removeItemTable(professor.id);
+          this.messageService.add({
+            severity: 'success',
+            detail: `Professor ${professor.nome} deletado com sucesso`
+          });
+        });
+      }
+    });
+  }
+
+  private removeItemTable(id: number) {
+    this.professores = this.professores.filter(professor => professor.id !== id);
   }
 
 }

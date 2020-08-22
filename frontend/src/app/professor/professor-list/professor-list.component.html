@@ -13,17 +13,15 @@
             <th>Nome</th>
             <th>Matrícula</th>
             <th>Área de Atuação</th>
-            <th>Data de Nascimento</th>
             <th clasCargs="colActions">Ações</th>
-            <th clasCargs="colActions">Detalhes</th>
+            <!-- <th clasCargs="colActions">Detalhes</th> -->
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-professor>
           <tr>
             <td>{{ professor.nome }}</td>
             <td>{{ professor.matricula }}</td>
-            <td>{{ professor.area_atuacao }}</td>
-            <td>{{ professor.dataNascimento }}</td>
+            <td>{{ professor.area }}</td>
             <td>
               <p-button icon="pi pi-pencil" [routerLink]="['/professor', professor.id]" pTooltip="Editar" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
               <p-button icon="pi pi-trash" pTooltip="Excluir" (click)="deletar(professor)" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>

@@ -1,7 +1,7 @@
 export class Professor {
   id?: number;
-  matricula?: string;
+  matricula?: number;
   nome?: string;
-  area_atuacao?: string;
+  area?: string;
   dataNascimento?: Date;
 }
