@@ -54,6 +54,7 @@ export class DisciplinaService {
                     );
   }
 
+  /** Atualizar Disciplina */
   public update(disciplina: Disciplina): Observable<Disciplina> {
     return this.http.put<Disciplina>(this.API, disciplina)
                     .pipe(
@@ -61,6 +62,7 @@ export class DisciplinaService {
                     );
   }
 
+  /** Detalhe Disciplina */
   public detail(id: number): Observable<DisciplinaDetail> {
     return this.http.get<DisciplinaDetail>(this.API + '/detalhes/' + id )
                     .pipe(

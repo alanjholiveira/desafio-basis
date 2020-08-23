@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Professor } from '../models/professor.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ProfessorDetail } from '../models/professor.detail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,14 @@ export class ProfessorService {
                     .pipe(
                       catchError(this.handleError)
                     )
+  }
+
+  /** Detalhe Professor */
+  public detail(id: number): Observable<ProfessorDetail> {
+    return this.http.get<ProfessorDetail>(this.API + '/detalhes/' + id)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
   }
 
   /** Handle Error */

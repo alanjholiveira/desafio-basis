@@ -16,9 +16,9 @@ export class DisciplinaDetailComponent implements OnInit {
   public professor: Professor = new Professor();
 
   constructor(
-    public disciplinaService: DisciplinaService,
-    public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig
+    private disciplinaService: DisciplinaService,
+    private ref: DynamicDialogRef,
+    private config: DynamicDialogConfig
   ) { }
 
   ngOnInit() {

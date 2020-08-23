@@ -1,25 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 import { ProfessorService } from '../services/professor.service';
 import { Professor } from '../models/professor.model';
+import { ProfessorDetailComponent } from '../professor-detail/professor-detail.component';
 
 @Component({
   selector: 'app-professor-list',
   templateUrl: './professor-list.component.html',
-  styleUrls: ['./professor-list.component.css']
+  styleUrls: ['./professor-list.component.css'],
+  providers: [DialogService]
 })
-export class ProfessorListComponent implements OnInit {
+export class ProfessorListComponent implements OnInit, OnDestroy {
 
   professores: Professor[];
+  ref: DynamicDialogRef;
 
   constructor(
     private professorService: ProfessorService,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dialogService: DialogService
     ) { }
 
   ngOnInit() {
@@ -50,6 +54,21 @@ export class ProfessorListComponent implements OnInit {
       }
     });
   }
+
+  showDetail(professor: Professor) {
+    this.ref = this.dialogService.open(ProfessorDetailComponent, {
+      data: professor,
+      header: `Detalhe do Professor(a): ${professor.nome}`,
+      closable: false,
+      width: '70%'
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.ref) {
+        this.ref.close();
+    }
+  } 
 
   private removeItemTable(id: number) {
     this.professores = this.professores.filter(professor => professor.id !== id);

@@ -13,14 +13,18 @@ import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { CardModule } from 'primeng/card';
 
 import { ProfessorListComponent } from './professor-list/professor-list.component';
 import { ProfessorFormComponent } from './professor-form/professor-form.component';
+import { ProfessorDetailComponent } from './professor-detail/professor-detail.component';
 
 @NgModule({
   declarations: [
     ProfessorListComponent,
-    ProfessorFormComponent
+    ProfessorFormComponent,
+    ProfessorDetailComponent
   ],
   imports: [
     CommonModule,
@@ -35,11 +39,16 @@ import { ProfessorFormComponent } from './professor-form/professor-form.componen
     CalendarModule,
     MultiSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DynamicDialogModule,
+    CardModule
   ],
   providers: [
     ConfirmationService,
     MessageService,
+  ],
+  entryComponents: [
+    ProfessorDetailComponent
   ]
 })
 export class ProfessorModule { }
