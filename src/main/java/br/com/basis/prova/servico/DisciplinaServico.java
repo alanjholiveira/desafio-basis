@@ -49,19 +49,18 @@ public class DisciplinaServico {
     }
 
     public void excluir(Integer id) {
-        Disciplina disciplina = disciplinaRepositorio
-                                    .findById(id)
-                                    .orElseThrow(() -> new RegraNegocioException("Disciplina não encontrada"));
+        Optional<Disciplina> disciplina = disciplinaRepositorio.findById(id);
 
-        if(verificarDisciplinaAluno(disciplina) ) {
+        if(disciplina.isPresent() && verificarDisciplinaAluno(disciplina.get()))
+        {
+            disciplinaRepositorio.delete(disciplina.get());
+        } else {
             throw new RegraNegocioException("Disciplina Com Aluno(s) Matriculado(s)");
         }
-
-        disciplinaRepositorio.delete(disciplina);
     }
 
     private boolean verificarDisciplinaAluno(Disciplina disciplina){
-        return (disciplina.getAluno().size() > 0);
+        return (disciplina.getAluno() == null || disciplina.getAluno().size() == 0);
     }
 
     public List<DisciplinaListagemDTO> consultar() {

@@ -68,16 +68,16 @@ public class AlunoServico {
     public void excluir(String matricula) {
         Optional<Aluno> aluno = alunoRepositorio.findByMatricula(matricula);
 
-        if (!aluno.isPresent() && verificarAlunoMatriculado(matricula)) {
+        if(aluno.isPresent() && verificarAlunoMatriculado(aluno.get())) {
+            alunoRepositorio.delete(aluno.get());
+        } else {
             throw new RegraNegocioException("Não é possivel excluir aluno matriculado");
         }
 
-        alunoRepositorio.delete(aluno.get());
     }
 
-    private boolean verificarAlunoMatriculado(String matricula) {
-        Optional<Aluno> alunoMatricula = alunoRepositorio.findByMatricula(matricula);
-        return (alunoMatricula.isPresent() && alunoMatricula.get().getDisciplinas().size() > 0);
+    private boolean verificarAlunoMatriculado(Aluno aluno) {
+        return (aluno.getDisciplinas() == null || aluno.getDisciplinas().size() == 0);
     }
 
     public List<AlunoListagemDTO> consultar() {

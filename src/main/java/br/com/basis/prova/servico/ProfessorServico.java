@@ -55,16 +55,16 @@ public class ProfessorServico {
     public void excluir(String matricula) {
         Optional<Professor> professor = professorRepositorio.findByMatricula(matricula);
 
-        if (!professor.isPresent() && verificarProfessorDisciplina(matricula)) {
-            throw new RegraNegocioException("Não é possivel excluir professor o mesmo está associado à alguma disciplina");
+        if(professor.isPresent() && verificarProfessorDisciplina(professor.get())) {
+            professorRepositorio.delete(professor.get());
+        } else {
+            throw new RegraNegocioException("Não é possivel excluir professor(a) associado(a) à alguma disciplina(s)");
         }
 
-        professorRepositorio.delete(professor.get());
     }
 
-    private boolean verificarProfessorDisciplina(String matricula) {
-        Optional<Professor> professor = professorRepositorio.findByMatricula(matricula);
-        return (professor.isPresent() && professor.get().getDisciplinas().size() > 0);
+    private boolean verificarProfessorDisciplina(Professor professor) {
+        return (professor.getDisciplinas() == null || professor.getDisciplinas().size() == 0);
     }
 
     public List<ProfessorListagemDTO> consultar() {
