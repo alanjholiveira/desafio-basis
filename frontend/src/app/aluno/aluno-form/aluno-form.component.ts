@@ -134,7 +134,7 @@ export class AlunoFormComponent implements OnInit {
         this.messageService.add(
           {
             severity:'success',
-            detail: `Aluno ${data.nome} Cadastro com Sucesso`
+            detail: `Aluno(a) ${data.nome} Cadastro(a) com Sucesso`
           }
         );
       });
@@ -143,7 +143,7 @@ export class AlunoFormComponent implements OnInit {
         this.messageService.add(
           {
             severity:'success',
-            detail: `Aluno ${data.nome} Atualizado com Sucesso`}
+            detail: `Aluno(a) ${data.nome} Atualizado(a) com Sucesso`}
           );
           // this.router.navigate(['/alunos']);
       });       

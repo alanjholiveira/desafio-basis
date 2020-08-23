@@ -51,6 +51,11 @@ export class DisciplinaListComponent implements OnInit, OnDestroy {
             severity: 'success',
             detail: `Disciplina ${disciplina.nome} deletado com sucesso`
           });
+        }, err => {
+          this.messageService.add({
+            severity: 'error',
+            detail: `Não e possivel excluir disciplina ${disciplina.nome} com aluno(a) matriculado(a)`
+          });
         });
       }
     });

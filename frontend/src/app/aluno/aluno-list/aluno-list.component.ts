@@ -46,22 +46,27 @@ export class AlunoListComponent implements OnInit, OnDestroy {
       accept: () => {
         this.alunoService.deletar(aluno.matricula).subscribe(() => {
           this.removeItemTable(aluno.id);
-           this.messageService.add(
-             { 
-               severity:'success',
-               detail: `Aluno ${aluno.nome} deletado com sucesso`
-             }
-           )
-         }
-       );
+            this.messageService.add(
+              { 
+                severity:'success',
+                detail: `Aluno(a) ${aluno.nome} deletado com sucesso`
+              }
+            )
+          }, err => {
+            this.messageService.add({
+              severity: 'error',
+              detail: `Não e possivel excluir aluno(a) ${aluno.nome} matriculado(a)`
+            });
+          }
+        );
       },
-    })           
+    });
   }
 
   showDetail(aluno: Aluno) {
     this.ref = this.dialogService.open(AlunoDetailComponent, {
       data: aluno,
-      header: `Detalhe do Aluno: ${aluno.nome} - Matricula: ${aluno.matricula}`,
+      header: `Detalhe do Aluno(a): ${aluno.nome} - Matricula: ${aluno.matricula}`,
       closable: false,
       width: '70%'
     });

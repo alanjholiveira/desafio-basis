@@ -91,7 +91,7 @@ export class ProfessorFormComponent implements OnInit {
         this.messageService.add(
           {
             severity: 'success',
-            detail: `Professor ${data.nome} Cadastro com Sucesso`
+            detail: `Professor(a) ${data.nome} Cadastro(a) com Sucesso`
           }
         )
       });
@@ -99,7 +99,7 @@ export class ProfessorFormComponent implements OnInit {
       this.professorService.update(professor).subscribe( data => {
         this.messageService.add({
           severity: 'success',
-          detail: `Professor ${data.nome} Atualizado com sucesso`
+          detail: `Professor(a) ${data.nome} Atualizado(a) com sucesso`
         });
       });
     }    

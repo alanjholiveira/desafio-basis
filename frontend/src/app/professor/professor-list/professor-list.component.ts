@@ -50,6 +50,11 @@ export class ProfessorListComponent implements OnInit, OnDestroy {
             severity: 'success',
             detail: `Professor ${professor.nome} deletado com sucesso`
           });
+        }, err => {
+          this.messageService.add({
+            severity: 'error',
+            detail: `Não e possivel excluir professor(a) ${professor.nome} responsável por disciplina`
+          });
         });
       }
     });
