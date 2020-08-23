@@ -19,12 +19,14 @@ import {CardModule} from 'primeng/card';
 import { AlunoListComponent } from './aluno-list/aluno-list.component';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 import { AlunoDetailComponent } from './aluno-detail/aluno-detail.component';
+import { AlunoAvaliacaoComponent } from './aluno-avaliacao/aluno-avaliacao.component';
 
 @NgModule({
   declarations: [
     AlunoListComponent,
     AlunoFormComponent,
     AlunoDetailComponent,
+    AlunoAvaliacaoComponent,
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { AlunoDetailComponent } from './aluno-detail/aluno-detail.component';
     MessageService,
   ],
   entryComponents: [
-    AlunoDetailComponent
+    AlunoDetailComponent,
+    AlunoAvaliacaoComponent
   ]
 })
 export class AlunoModule { }

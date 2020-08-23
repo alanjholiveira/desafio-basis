@@ -6,6 +6,7 @@ import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import { AlunoService } from '../services/aluno.service';
 import { Aluno } from '../models/aluno.model';
 import { AlunoDetailComponent } from '../aluno-detail/aluno-detail.component';
+import { AlunoAvaliacaoComponent } from '../aluno-avaliacao/aluno-avaliacao.component';
 
 @Component({
   selector: 'app-aluno-list',
@@ -69,6 +70,15 @@ export class AlunoListComponent implements OnInit, OnDestroy {
       header: `Detalhe do Aluno(a): ${aluno.nome} - Matricula: ${aluno.matricula}`,
       closable: false,
       width: '70%'
+    });
+  }
+
+  showAvaliacao(aluno: Aluno) {
+    this.ref = this.dialogService.open(AlunoAvaliacaoComponent, {
+      data: aluno,
+      header: `Avaliação do Aluno(a): ${aluno.nome}`,
+      closable: false,
+      width: '80%'
     });
   }
 
