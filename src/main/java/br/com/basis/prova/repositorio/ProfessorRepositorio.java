@@ -14,7 +14,4 @@ public interface ProfessorRepositorio extends JpaRepository<Professor, Integer>,
 
     boolean existsByMatricula(String matricula);
 
-    //List<Professor> findByIdAndDisciplinasAtiva(Integer id);
-
-
 }

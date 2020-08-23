@@ -1,5 +1,6 @@
 package br.com.basis.prova.recurso;
 
+import br.com.basis.prova.dominio.dto.AlunoAvaliacaoDTO;
 import br.com.basis.prova.dominio.dto.AlunoDTO;
 import br.com.basis.prova.dominio.dto.AlunoDetalhadoDTO;
 import br.com.basis.prova.dominio.dto.AlunoListagemDTO;
@@ -62,6 +63,11 @@ public class AlunoRecurso {
     @GetMapping("{id}")
     public ResponseEntity<AlunoDTO> find(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(alunoServico.find(id));
+    }
+
+    @GetMapping("/{id}/avaliacoes")
+    public ResponseEntity<AlunoAvaliacaoDTO> findByAvaliacao(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(alunoServico.findByAvaliacao(id));
     }
 
 }

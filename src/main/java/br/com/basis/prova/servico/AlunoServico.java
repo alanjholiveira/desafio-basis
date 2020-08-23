@@ -1,20 +1,19 @@
 package br.com.basis.prova.servico;
 
 import br.com.basis.prova.dominio.Aluno;
+import br.com.basis.prova.dominio.Avaliacao;
+import br.com.basis.prova.dominio.dto.AlunoAvaliacaoDTO;
 import br.com.basis.prova.dominio.dto.AlunoDTO;
 import br.com.basis.prova.dominio.dto.AlunoDetalhadoDTO;
 import br.com.basis.prova.dominio.dto.AlunoListagemDTO;
 import br.com.basis.prova.repositorio.AlunoRepositorio;
+import br.com.basis.prova.repositorio.AvaliacaoRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
-import br.com.basis.prova.servico.mapper.AlunoDetalhadoMapper;
-import br.com.basis.prova.servico.mapper.AlunoListagemMapper;
-import br.com.basis.prova.servico.mapper.AlunoMapper;
-import org.springframework.http.HttpStatus;
+import br.com.basis.prova.servico.mapper.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +25,14 @@ public class AlunoServico {
     private AlunoRepositorio alunoRepositorio;
     private AlunoListagemMapper alunoListagemMapper;
     private AlunoDetalhadoMapper alunoDetalhadoMapper;
+
+    @Autowired
+    private AvaliacaoRepositorio avaliacaoRepositorio;
+    @Autowired
+    private AvaliacaoListagemMapper avaliacaoListagemMapper;
+    @Autowired
+    private AlunoAvaliacaoMapper alunoAvaliacaoMapper;
+
 
     public AlunoServico(AlunoMapper alunoMapper, AlunoRepositorio alunoRepositorio,
                         AlunoListagemMapper alunoListagemMapper, AlunoDetalhadoMapper alunoDetalhadoMapper) {
@@ -96,6 +103,20 @@ public class AlunoServico {
                 .orElseThrow(() -> new RegraNegocioException("Aluno não encontrado"));
 
         return alunoMapper.toDto(aluno);
+    }
+
+    public AlunoAvaliacaoDTO findByAvaliacao(Integer id) {
+        Optional<Aluno> aluno = this.alunoRepositorio.findById(id);
+
+        if (aluno.isPresent()) {
+            List<Avaliacao> avaliacoes = this.avaliacaoRepositorio.findByAluno(aluno.get());
+            AlunoAvaliacaoDTO alunoAvaliacaoDTO = this.alunoAvaliacaoMapper.toDto(aluno.get());
+            alunoAvaliacaoDTO.setAvaliacoes(this.avaliacaoListagemMapper.toDto(avaliacoes));
+
+            return alunoAvaliacaoDTO;
+        }
+
+        throw new RegraNegocioException("Falha ao localizar avaliações do aluno(a)");
     }
 
 }

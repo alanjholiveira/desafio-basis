@@ -67,5 +67,22 @@
 
         </sql>
     </changeSet>
+    
+    <changeSet id="5" author="alan.oliveira">
+        <sql>
+
+            CREATE TABLE AVALIACAO (
+                ID INT NOT NULL AUTO_INCREMENT COMMENT 'Chave primária da tabela avaliacao',
+                ID_ALUNO INT NOT NULL COMMENT 'Campo que relaciona uma AVALIACAO a um ALUNO',
+                ID_DISCIPLINA INT NOT NULL COMMENT 'Campo que relaciona uma AVALIACAO a uma DISCIPLINA',
+                NOTA DECIMAL(10, 2) NOT NULL COMMENT 'Campo que armazena a nota para avaliacao',
+                DATA date NOT NULL COMMENT 'Campo que armazena data que ocorreu avaliacao',
+                CONSTRAINT PK_AVALIACAO_ID PRIMARY KEY ( ID ),
+                CONSTRAINT FK_AVALIACAO_ALUNO_ID FOREIGN KEY ( ID_ALUNO ) REFERENCES ALUNO ( ID ),
+                CONSTRAINT FK_AVALIACAO_DISCIPLINA_ID FOREIGN KEY ( ID_DISCIPLINA ) REFERENCES DISCIPLINA( ID )
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>
