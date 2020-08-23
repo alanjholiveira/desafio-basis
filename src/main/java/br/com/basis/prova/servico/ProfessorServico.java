@@ -2,12 +2,14 @@ package br.com.basis.prova.servico;
 
 import br.com.basis.prova.dominio.Disciplina;
 import br.com.basis.prova.dominio.Professor;
+import br.com.basis.prova.dominio.dto.DisciplinaListagemDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDTO;
 import br.com.basis.prova.dominio.dto.ProfessorDetalhadoDTO;
 import br.com.basis.prova.dominio.dto.ProfessorListagemDTO;
 import br.com.basis.prova.repositorio.DisciplinaRepositorio;
 import br.com.basis.prova.repositorio.ProfessorRepositorio;
 import br.com.basis.prova.servico.exception.RegraNegocioException;
+import br.com.basis.prova.servico.mapper.DisciplinaListagemMapper;
 import br.com.basis.prova.servico.mapper.ProfessorDetalhadoMapper;
 import br.com.basis.prova.servico.mapper.ProfessorListagemMapper;
 import br.com.basis.prova.servico.mapper.ProfessorMapper;
@@ -29,6 +31,9 @@ public class ProfessorServico {
 
     @Autowired
     private DisciplinaRepositorio disciplinaRepositorio;
+
+    @Autowired
+    private DisciplinaListagemMapper disciplinaListagemMapper;
 
     public ProfessorServico(ProfessorMapper professorMapper, ProfessorRepositorio professorRepositorio,
                             ProfessorListagemMapper professorListagemMapper,
@@ -68,10 +73,17 @@ public class ProfessorServico {
     }
 
     public ProfessorDetalhadoDTO detalhar(Integer id) {
-        Professor professor = professorRepositorio
-                .findById(id)
-                .orElseThrow(() -> new RegraNegocioException("Professor não encontrado"));
-        return professorDetalhadoMapper.toDto(professor);
+        Optional<Professor> professor = professorRepositorio.findById(id);
+
+        if(!professor.isPresent()) {
+            throw new RegraNegocioException("Professor não localizado");
+        }
+
+        List<Disciplina> disciplinas = this.disciplinaRepositorio.findDisciplinasAtivaByProfessor(professor.get());
+        ProfessorDetalhadoDTO professorDetalhadoDTO = professorDetalhadoMapper.toDto(professor.get());
+        professorDetalhadoDTO.setDisciplinas(this.disciplinaListagemMapper.toDto(disciplinas));
+
+        return professorDetalhadoDTO;
     }
 
     public ProfessorDTO find(Integer id) {

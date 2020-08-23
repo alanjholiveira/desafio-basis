@@ -15,9 +15,7 @@ public interface DisciplinaRepositorio extends JpaRepository<Disciplina, Integer
 
     List<Disciplina> findByProfessor(Professor professor);
 
-    @Query(value = "SELECT D.ID, D.NOME, D.DESCRICAO, D.CARGA_HORARIA, D.ATIVA, D.ID_PROFESSOR\n" +
-            "FROM disciplina as D, professor as P WHERE D.ATIVA = 1 AND P.ID = :id\n" +
-            "AND D.ID_PROFESSOR = :id", nativeQuery = true)
-    List<Disciplina> findByAtivas(@Param("id") Integer id);
+    @Query("SELECT d FROM Disciplina d WHERE d.ativa = 1 AND d.professor = :professor")
+    List<Disciplina> findDisciplinasAtivaByProfessor(@Param("professor") Professor professor);
 
 }
