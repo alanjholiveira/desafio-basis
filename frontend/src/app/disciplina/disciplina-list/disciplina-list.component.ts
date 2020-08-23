@@ -1,25 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { DisciplinaService } from '../services/disciplina.service';
-
-import { Disciplina } from '../models/disciplina.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
+
+import { DisciplinaService } from '../services/disciplina.service';
+import { Disciplina } from '../models/disciplina.model';
 import { Router } from '@angular/router';
 import { DisciplinaListagem } from '../models/disciplinaListagem.model';
+import { DisciplinaDetailComponent } from '../disciplina-detail/disciplina-detail.component';
 
 @Component({
   selector: 'app-disciplina-list',
   templateUrl: './disciplina-list.component.html',
-  styleUrls: ['./disciplina-list.component.css']
+  styleUrls: ['./disciplina-list.component.css'],
+  providers: [DialogService]
 })
-export class DisciplinaListComponent implements OnInit {
+export class DisciplinaListComponent implements OnInit, OnDestroy {
 
   disciplinas: DisciplinaListagem[];
+  ref: DynamicDialogRef;
 
   constructor(
     private disciplinaService: DisciplinaService,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -50,6 +55,21 @@ export class DisciplinaListComponent implements OnInit {
       }
     });
   }
+
+  showDetail(disciplina: Disciplina) {
+    this.ref = this.dialogService.open(DisciplinaDetailComponent, {
+      data: disciplina,
+      header: `Detalhe da Disciplina: ${disciplina.nome}`,
+      closable: false,
+      width: '70%'
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.ref) {
+        this.ref.close();
+    }
+  } 
 
   private removeItemTable(id: number) {
     this.disciplinas = this.disciplinas.filter(disciplina => disciplina.id !== id);

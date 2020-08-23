@@ -6,6 +6,7 @@ import { Disciplina } from '../models/disciplina.model';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { DisciplinaListagem } from '../models/disciplinaListagem.model';
+import { DisciplinaDetail } from '../models/disciplina.detail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,12 @@ export class DisciplinaService {
                     );
   }
 
+  public detail(id: number): Observable<DisciplinaDetail> {
+    return this.http.get<DisciplinaDetail>(this.API + '/detalhes/' + id )
+                    .pipe(
+                      catchError(this.handleError)
+                    );
+  }
 
   /** Handle Error */
   private handleError(error: HttpErrorResponse) {

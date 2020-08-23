@@ -13,12 +13,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { CardModule } from 'primeng/card';
 
 import { DisciplinaListComponent } from './disciplina-list/disciplina-list.component';
 import { DisciplinaFormComponent } from './disciplina-form/disciplina-form.component';
+import { DisciplinaDetailComponent } from './disciplina-detail/disciplina-detail.component';
 
 @NgModule({
-  declarations: [DisciplinaListComponent, DisciplinaFormComponent],
+  declarations: [
+    DisciplinaListComponent,
+    DisciplinaFormComponent,
+    DisciplinaDetailComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -33,11 +40,16 @@ import { DisciplinaFormComponent } from './disciplina-form/disciplina-form.compo
     MultiSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    DynamicDialogModule,
+    CardModule
   ],
   providers: [
     ConfirmationService,
     DatePipe
+  ],
+  entryComponents: [
+    DisciplinaDetailComponent
   ]
 })
 export class DisciplinaModule { }

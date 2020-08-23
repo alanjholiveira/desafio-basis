@@ -1,0 +1,10 @@
+<p-card>
+    
+    <p>- <strong>Disciplina:</strong> {{ disciplinaDetail.nome }} </p>
+    <p>- <strong>Carga Horária:</strong> {{ disciplinaDetail.cargaHoraria }}</p>
+    <p>- <strong>Professor:</strong> {{ professor.nome }} - <strong>Matricula:</strong> {{ professor.matricula }}</p>
+
+    <p-footer>
+        <p-button (click)="closeDialog()" label="Fechar" icon="pi pi-times"></p-button>
+    </p-footer>
+</p-card>
