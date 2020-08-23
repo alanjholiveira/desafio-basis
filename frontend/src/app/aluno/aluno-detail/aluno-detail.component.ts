@@ -31,7 +31,6 @@ export class AlunoDetailComponent implements OnInit, OnDestroy {
   }
 
   closeDialog() {
-    console.log('tes');
     this.ref.close()
   }
 
