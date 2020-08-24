@@ -10,6 +10,7 @@ import { ProfessorListComponent } from './professor/professor-list/professor-lis
 import { DisciplinaFormComponent } from './disciplina/disciplina-form/disciplina-form.component';
 import { DisciplinaListComponent } from './disciplina/disciplina-list/disciplina-list.component';
 import { AvaliacaoListComponent } from './avaliacao/avaliacao-list/avaliacao-list.component';
+import { AvaliacaoFormComponent } from './avaliacao/avaliacao-form/avaliacao-form.component';
 
 const appRoutes: Routes = [
   { path: "home", component: HomeComponent },
@@ -27,6 +28,8 @@ const appRoutes: Routes = [
   { path: 'disciplina/:id', component: DisciplinaFormComponent },
 
   { path: 'avaliacoes', component: AvaliacaoListComponent },
+  { path: 'avaliacao', component: AvaliacaoFormComponent },
+  { path: 'avaliacao/:id', component: AvaliacaoFormComponent },
   
   { path: "", redirectTo: "/home", pathMatch: "full" }
 ];

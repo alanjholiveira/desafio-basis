@@ -25,6 +25,29 @@ export class AvaliacaoService {
                       catchError(this.handleError)
                     );
   }
+
+  public obterAvaliacao(id: number): Observable<Avaliacao> {
+    return this.http.get<Avaliacao>(this.API + '/' + id)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
+  }
+
+  /** Salvar Avaliação */
+  public store(avaliacao: Avaliacao): Observable<Avaliacao> {
+    return this.http.post<Avaliacao>(this.API, avaliacao)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
+  }
+
+  /** Atualizar Avaliação */
+  public update(avaliacao: Avaliacao): Observable<Avaliacao> {
+    return this.http.put<Avaliacao>(this.API, avaliacao)
+                    .pipe(
+                      catchError(this.handleError)
+                    );
+  }
   
   /** Handle Error */
   private handleError(error: HttpErrorResponse) {

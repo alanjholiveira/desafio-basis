@@ -4,7 +4,7 @@
   
     <ng-container>
       <div class="ui-g-12">
-          <!-- <p-button label="Novo" [routerLink]="['/avaliacao']" class="ui-button-text" id="btNovo" ></p-button> -->
+          <p-button label="Novo" [routerLink]="['/avaliacao']" class="ui-button-text" id="btNovo" ></p-button>
       </div>
   
       <div class="ui-g-12">
@@ -26,8 +26,7 @@
               <td>{{ avaliacao.disciplina.nome }}</td>
               <td>{{ avaliacao.nota }}</td>
               <td>
-                <!-- <p-button icon="pi pi-pencil" [routerLink]="['/aluno', aluno.id]" pTooltip="Editar" tooltipPosition="top" class="ui-button-icon btAction" ></p-button> -->
-                <!-- <p-button icon="pi pi-trash" pTooltip="Excluir" (click)="deletar(aluno)" tooltipPosition="top" class="ui-button-icon btAction" ></p-button> -->
+                <p-button icon="pi pi-pencil" [routerLink]="['/avaliacao', avaliacao.id]" pTooltip="Editar" tooltipPosition="top" class="ui-button-icon btAction" ></p-button>
               </td>
             </tr>
           </ng-template>

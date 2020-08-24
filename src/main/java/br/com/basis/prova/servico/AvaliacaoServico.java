@@ -56,5 +56,14 @@ public class AvaliacaoServico {
         return this.avaliacaoMapper.toDto(this.avaliacaoRepositorio.findAll());
     }
 
+    public AvaliacaoDTO find(Integer id) {
+        Optional<Avaliacao> avaliacao = this.avaliacaoRepositorio.findById(id);
+
+        if (avaliacao.isPresent()) {
+            return this.avaliacaoMapper.toDto(avaliacao.get());
+        }  else {
+            throw new RegraNegocioException("Falha ao obter Avaliação");
+        }
+    }
 
 }

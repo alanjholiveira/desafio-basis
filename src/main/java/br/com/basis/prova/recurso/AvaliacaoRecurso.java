@@ -42,4 +42,9 @@ public class AvaliacaoRecurso {
         return ResponseEntity.ok(this.avaliacaoServico.consultar());
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<AvaliacaoDTO> find(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(this.avaliacaoServico.find(id));
+    }
+
 }

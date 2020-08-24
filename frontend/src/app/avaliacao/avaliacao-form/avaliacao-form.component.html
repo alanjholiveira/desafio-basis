@@ -1,0 +1,50 @@
+<p-toast position="top-right" [style]="{marginTop: '80px'}"></p-toast>
+
+<ng-container>
+  <div class="ui-g">
+    <div class="ui-g-8 ui-g-offset-2">
+      <form [formGroup]="form">
+        <p-panel header="{{ title+' de Avaliacao' | uppercase }}">
+
+          <div class="ui-g mb-1 mt-1">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <p-calendar formControlName="data" dataType="string" dateFormat="dd/mm/yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2030"[locale]="pt" ></p-calendar>
+                <label>Data da Avaliação</label>
+              </span>
+            </div>
+          </div>
+
+          <div class="ui-g mb-1">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <input type="text" pInputText formControlName="nota" id="nota" [ngClass]="{ 'is-invalid' : submitted }">
+                <label for="float-input">Nota</label>
+              </span>
+            </div>
+          </div>
+
+          <div class="ui-g mb-1">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <p-dropdown (onChange)="onChange(alunoSelecionado)" [options]="listaAlunos" [(ngModel)]="alunoSelecionado" placeholder="Alunos" formControlName="aluno" [filter]="true"></p-dropdown>
+              </span>
+            </div>
+          </div>
+
+          <div class="ui-g mb-1">
+            <div class="ui-g-12">
+              <span class="ui-float-label ui-fluid">
+                <p-dropdown [options]="listaDisciplinas" placeholder="Disciplinas" formControlName="disciplina" [filter]="true"></p-dropdown>
+              </span>
+            </div>
+          </div>
+
+          <p-button label="Salvar" class="ui-button-text botaoFrm" (click)="onSubmit()" ></p-button>
+          <p-button label="Cancelar" class="ui-button-text botaoFrm" (click)="onCancel()" ></p-button>
+        </p-panel>
+      </form>
+    </div>
+  </div>
+</ng-container>
+
