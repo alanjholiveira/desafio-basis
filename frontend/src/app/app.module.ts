@@ -18,6 +18,7 @@ import { ConfirmationService, MessageService} from 'primeng/api';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
+import { AvaliacaoModule } from './avaliacao/avaliacao.module';
 
 registerLocaleData(localePt, 'pt');
 
@@ -36,6 +37,7 @@ registerLocaleData(localePt, 'pt');
     AlunoModule,
     DisciplinaModule,
     ProfessorModule,
+    AvaliacaoModule,
     AppRoutingModule,
     ToastModule,
   ],

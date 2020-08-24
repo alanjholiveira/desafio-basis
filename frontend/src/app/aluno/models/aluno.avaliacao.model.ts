@@ -1,4 +1,4 @@
-import { AvaliacaoListagem } from './avaliacao.listagem.model';
+import { AvaliacaoListagem } from '../../avaliacao/models/avaliacao.listagem.model';
 
 export class AlunoAvaliacao {
   id?: number;

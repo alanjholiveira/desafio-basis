@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
       {label: 'Alunos', icon: 'pi pi-users', link : '/alunos'},
       {label: 'Professores', icon: 'pi pi-briefcase', link : '/professores'},
       {label: 'Disciplinas', icon: 'pi pi-id-card', link: '/disciplinas'},
+      {label: 'Avaliaçoes', icon: 'pi pi-question-circle', link: '/avaliacoes'}
     ];
 
     this.activeItem = this.items[0];
